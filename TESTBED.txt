@@ -1,0 +1,50 @@
+This is my little sample of my best shot at using Help Manager.
+I've found some interesting things about the help manager, and some 
+mysteries remain.  The most obvious thing is that the Microsoft
+Toolkit is horribly under-documented.
+
+First thing to watch for is error codes.  I'm not real sure why, but
+somebody decided to start them at 0x1000.  This, of course, is the
+same as the PM error codes.  When you call WinGetLastError() and 
+WinGetErrorInfo(), you'd better know if your expecting a PM 
+or a Help Manager code.
+
+One thing that is not made real clear from the documentation is that the
+window you are associating with Help has to be assigned an ID.  It's 
+easy to miss this, since the WinCreateStdWindow() call doesn't let you assign
+them automatically.  The other part is that it has to be assigned to the
+FRAME window, not the client window.  So, you can take the result (say, 
+"hwndFrame" of the call and then call 
+        WinSetWindowUShort( hwndFrame, QWS_ID, id);
+to set your id, before you call WinAssociateHelpInstance().
+
+Strangely enough, my programs create several top-level windows.  I've found
+that WinAssociateHelpInstance() can be called for each of them.
+
+Not all requests to the Help Manager go through your code.  For
+example, menu selection help requests from the keyboard seem to get 
+captured in the system somehow and directed to HM.  Also, HM seems
+to call window procedures directly when it "sends messages": they don't
+go through the dispatch routine either.
+
+
+As to creating the program, the C6.00 NMAKE utility was used, with the
+make file being created by PWB.  Nothing fancy.  One thing that is not
+in the make file is the compilation of the help source text.  I used the
+line:
+        IPFC /W3 /X testbed.ipf
+which creates the file testbed.hlp.  Getting access to the Toolkit's
+Help for IPFC fooled me at first, but I just copied the IPFC help file into
+the same directory as the other help files, and then opened it directly with
+QuickHelp.  (I think QH opens all files it finds on startup, because next
+time it had found it on its own.)  All the info about the IPF LANGUAGE (such
+as it is) is there as well.  I stepped through the table of contents and
+printed out everything I thought would be useful.  (There is no printed
+manual, as far as I know.)
+
+More comments are in the source files.   Good Luck!
+
+
+Bob Whitten,  CSIDs 71611,1656 or 72220,2137.
+
+

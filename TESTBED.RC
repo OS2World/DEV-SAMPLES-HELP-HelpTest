@@ -1,0 +1,114 @@
+/**************************
+ testbed.rc
+***************************/
+
+#include <os2.h>
+#include "testbed.h"
+
+POINTER ID_BASE_RESOURCE  testbed.ico
+
+
+MENU ID_BASE_RESOURCE
+  {
+  SUBMENU "~File",                          IDM_BASE_FILE
+    {
+    MENUITEM "E~xit",                       IDM_BFI_EXIT
+    MENUITEM SEPARATOR
+    MENUITEM "~About TESTBED",              IDM_BFI_ABOUT
+    }
+  SUBMENU "~Help",                          IDM_BASE_HELP
+    {
+    MENUITEM "~Help for help...",           IDM_HELPFORHELP
+    MENUITEM "~Extended help...",           IDM_EXTENDEDHELP
+    MENUITEM "~Keys help...",               IDM_KEYSHELP
+    MENUITEM "Help ~Index...",              IDM_HELPINDEX
+    MENUITEM SEPARATOR
+    MENUITEM "~About TESTBED",              IDM_ABOUT
+    }
+  }
+
+
+HELPSUBTABLE ID_BASE_RESOURCE
+BEGIN
+  HELPSUBITEM IDM_BASE_FILE,       IDM_BASE_FILE
+  HELPSUBITEM IDM_BFI_EXIT,        IDM_BFI_EXIT
+  HELPSUBITEM IDM_BFI_ABOUT,       IDM_BFI_ABOUT
+  HELPSUBITEM IDM_HELPFORHELP,     0
+  HELPSUBITEM IDM_EXTENDEDHELP,    IDM_EXTENDEDHELP
+  HELPSUBITEM IDM_KEYSHELP,        0
+  HELPSUBITEM IDM_HELPINDEX,       0
+  HELPSUBITEM IDM_ABOUT,           IDM_ABOUT
+END
+
+
+POINTER ID_OTHER_RESOURCE testbed.ico
+
+MENU ID_OTHER_RESOURCE
+  {
+  SUBMENU "~Things",                        IDM_OTHER_THINGS
+    {
+    MENUITEM "Thing ~1",                    IDM_OT_1
+    MENUITEM "Thing ~2",                    IDM_OT_2
+    MENUITEM "Thing ~3",                    IDM_OT_3
+    }
+  SUBMENU "~Stuff",                         IDM_OTHER_STUFF
+    {
+    MENUITEM "Stuff ~1",                    IDM_OS_1
+    MENUITEM "Stuff ~2",                    IDM_OS_2
+    MENUITEM "Stuff ~3",                    IDM_OS_3
+    }
+  MENUITEM  "~Dialog Box 1",                IDM_DIALOGBOX1
+  SUBMENU "~Help",                          IDM_OTHER_HELP
+    {
+    MENUITEM "~Help for help...",           IDM_HELPFORHELP
+    MENUITEM "~Extended help...",           IDM_EXTENDEDHELP
+    MENUITEM "~Keys help...",               IDM_KEYSHELP
+    MENUITEM "Help ~Index...",              IDM_HELPINDEX
+    MENUITEM "~About TESTBED",              IDM_ABOUT
+    }
+  }
+
+
+HELPSUBTABLE ID_OTHER_RESOURCE
+BEGIN
+  HELPSUBITEM IDM_OTHER_THINGS,    IDM_OTHER_THINGS
+  HELPSUBITEM IDM_OT_1,            IDM_OT_1       
+  HELPSUBITEM IDM_OT_2,            IDM_OT_2
+  HELPSUBITEM IDM_OT_3,            IDM_OT_3
+  HELPSUBITEM IDM_OTHER_STUFF,     IDM_OTHER_STUFF
+  HELPSUBITEM IDM_OS_1,            IDM_OS_1       
+  HELPSUBITEM IDM_OS_2,            IDM_OS_2
+  HELPSUBITEM IDM_OS_3,            IDM_OS_3
+  HELPSUBITEM IDC_BUTTON,          IDC_BUTTON
+  HELPSUBITEM IDM_DIALOGBOX1,      IDM_DIALOGBOX1
+  HELPSUBITEM IDC_DIALOGBOX2,      IDC_DIALOGBOX2
+  HELPSUBITEM IDM_HELPFORHELP,     IDM_HELPFORHELP
+  HELPSUBITEM IDM_EXTENDEDHELP,    IDM_EXTENDEDHELP
+  HELPSUBITEM IDM_KEYSHELP,        IDM_KEYSHELP
+  HELPSUBITEM IDM_HELPINDEX,       IDM_HELPINDEX
+END
+
+
+DLGTEMPLATE IDD_DIALOGBOX1
+BEGIN
+  DIALOG "", IDD_DIALOGBOX1, 10, 10, 200, 88,, FCF_DLGBORDER
+    {
+    CTEXT "Dialog Box 1",              -1, 10, 64, 180, 8
+    DEFPUSHBUTTON "OK", DID_DIALOGBOX1_OK, 10,  8,  20, 16, WS_GROUP
+    PUSHBUTTON    "SO-SO",       DID_SOSO, 40   8,  50, 16,
+    PUSHBUTTON "Help",DID_DIALOGBOX1_HELP,150,  8,  40, 16, BS_HELP | BS_NOPOINTERFOCUS
+    }
+END
+
+HELPSUBTABLE IDD_DIALOGBOX1
+BEGIN
+  HELPSUBITEM DID_DIALOGBOX1_OK,   DID_DIALOGBOX1_OK
+  HELPSUBITEM DID_SOSO,            DID_SOSO
+END
+
+HELPTABLE ID_BASE_RESOURCE
+BEGIN
+  HELPITEM ID_BASE_RESOURCE,       ID_BASE_RESOURCE,       IDM_EXTENDEDHELP
+  HELPITEM ID_OTHER_RESOURCE,      ID_OTHER_RESOURCE,      ID_OTHER_RESOURCE
+  HELPITEM IDD_DIALOGBOX1,         IDD_DIALOGBOX1,         IDD_DIALOGBOX1
+END
